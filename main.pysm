@@ -1,4 +1,4 @@
-; This is test of the comments
+; this will add two numbers
 
 mov startnum 12
 mov endnum 32
