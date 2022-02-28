@@ -1,5 +1,4 @@
 import argparse
-import sys
 
 import sys
 
@@ -94,7 +93,7 @@ def compile(program):
             start = None
             last = None
             finish = None
-            for x in range(instruct_pointer+1, len(instructions)):
+            for x in range(instruct_pointer + 1, len(instructions)):
                 if [ord(w) for w in instructions[x][0:4]] == [32, 32, 32, 32]:
                     if start is None:
                         start = x

@@ -1,5 +1,6 @@
 ; This is the Pyssembly test file
 
+; function Adding 2 numbers
 ADD:2:
     mov PLS_X ADD_PARAM1
     mov PLS_Y ADD_PARAM2
@@ -12,7 +13,19 @@ ADD:2:
     del PLS_X
     del PLS_Y
 
+SUB:2:
+    mov SUB_X SUB_PARAM1
+    mov SUB_Y SUB_PARAM2
+    dec SUB_Y
+    dec SUB_X
+    jnz SUB_Y -2
+    mov SUB_RET SUB_X
+    mov SUB_PARAM1 0
+    mov SUB_PARAM2 0
+    del SUB_X
+    del SUB_Y
 
+; function Multiplying 2 numbers
 MULT:2:
     mov MULT_RESULT 0
     mov MULT_Y MULT_PARAM2
@@ -29,15 +42,37 @@ MULT:2:
     del MULT_X
     del MULT_RESULT
 
+; Multiplication test
+;mov MULT_PARAM1 12
+;mov MULT_PARAM2 32
+;mov result 0
+;
+;call MULT
+;
+;mov result MULT_RET
+;mov MULT_RET 0
+;
+;out result
 
-out this is test of std
-mov MULT_PARAM1 12
-mov MULT_PARAM2 32
-mov result 0
 
-call MULT
+; Subtraction test
+;mov SUB_PARAM1 32
+;mov SUB_PARAM2 12
+;mov result 0
+;
+;call SUB
+;
+;mov result SUB_RET
+;mov SUB_RET 0
+;out result
 
-mov result MULT_RET
-mov MULT_RET 0
-
-out result
+; Addition test
+;mov ADD_PARAM1 32
+;mov ADD_PARAM2 12
+;mov result 0
+;
+;call ADD
+;
+;mov result ADD_RET
+;mov ADD_RET 0
+;out result
