@@ -1,5 +1,7 @@
 import argparse
-import time
+import sys
+
+import sys
 
 parser = argparse.ArgumentParser()
 
@@ -72,8 +74,15 @@ def compile(program):
         elif disassemble[0] == "pmem":
             print(memory)
         elif disassemble[0] == "out":
-            if disassemble[1] in memory:
-                print(memory[disassemble[1]])
+            for item in disassemble[1:]:
+                if item in memory:
+                    wrt = str(memory[item])
+                    sys.stdout.write(wrt)
+                else:
+                    wrt = str(item)
+                    sys.stdout.write(wrt)
+                sys.stdout.write(" ")
+            sys.stdout.write("\n")
         elif ":" in instructions[instruct_pointer]:
             ins_strp = instructions[instruct_pointer].strip()
             FUNC_NAME = ins_strp[:ins_strp.find(":")].strip()
@@ -85,12 +94,13 @@ def compile(program):
             start = None
             last = None
             finish = None
-            for x in range(instruct_pointer, len(instructions)):
-                if instructions[x].startswith("    "):
+            for x in range(instruct_pointer+1, len(instructions)):
+                if [ord(w) for w in instructions[x][0:4]] == [32, 32, 32, 32]:
                     if start is None:
                         start = x
-                if last is True and not instructions[x].startswith("    "):
+                if last is True and not [ord(w) for w in instructions[x][0:4]] == [32, 32, 32, 32]:
                     finish = x - 1
+                    break
                 last = instructions[x].startswith("    ")
             memory[f"{FUNC_NAME}_START"] = start
             memory[f"{FUNC_NAME}_END"] = finish
@@ -98,9 +108,9 @@ def compile(program):
             continue
         elif "call" == disassemble[0]:
             if f"{disassemble[1]}_START" in memory:
-                memory["GOTO"] = instruct_pointer+1
-                memory["GOTO_IP"] = memory[f"{disassemble[1]}_END"]+1
-                instruct_pointer = memory[f"{disassemble[1]}_START"]-1
+                memory["GOTO"] = instruct_pointer + 1
+                memory["GOTO_IP"] = memory[f"{disassemble[1]}_END"] + 1
+                instruct_pointer = memory[f"{disassemble[1]}_START"] - 1
         instruct_pointer += 1
     return memory
 

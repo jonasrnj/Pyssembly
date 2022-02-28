@@ -1,8 +1,4 @@
-; this will add two numbers
-
-mov startnum 12
-mov endnum 32
-mov result 0
+; This is the Pyssembly test file
 
 ADD:2:
     mov PLS_X ADD_PARAM1
@@ -17,13 +13,31 @@ ADD:2:
     del PLS_Y
 
 
+MULT:2:
+    mov MULT_RESULT 0
+    mov MULT_Y MULT_PARAM2
+    mov MULT_X MULT_PARAM1
+    inc MULT_RESULT
+    dec MULT_X
+    jnz MULT_X -2
+    dec MULT_Y
+    jnz MULT_Y -5
+    del MULT_X
+    del MULT_Y
+    mov MULT_RET MULT_RESULT
+    del MULT_X
+    del MULT_X
+    del MULT_RESULT
 
-mov ADD_PARAM1 startnum
-mov ADD_PARAM2 endnum
 
-call ADD
+out this is test of std
+mov MULT_PARAM1 12
+mov MULT_PARAM2 32
+mov result 0
 
-mov result ADD_RET
+call MULT
+
+mov result MULT_RET
+mov MULT_RET 0
 
 out result
-
