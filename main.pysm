@@ -1,0 +1,29 @@
+; This is test of the comments
+
+mov startnum 12
+mov endnum 32
+mov result 0
+
+ADD:2:
+    mov PLS_X ADD_PARAM1
+    mov PLS_Y ADD_PARAM2
+    dec PLS_Y
+    inc PLS_X
+    jnz PLS_Y -2
+    mov ADD_RET PLS_X
+    mov ADD_PARAM1 0
+    mov ADD_PARAM2 0
+    del PLS_X
+    del PLS_Y
+
+
+
+mov ADD_PARAM1 startnum
+mov ADD_PARAM2 endnum
+
+call ADD
+
+mov result ADD_RET
+
+out result
+
